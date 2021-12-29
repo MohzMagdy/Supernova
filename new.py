@@ -1,12 +1,33 @@
 from vpython import *
-rate1 = 100
-def Dec_Rate(rate1):
-    while rate1 == 1000:
-        rate1 = 10
-        print(rate1)
-scene.bind('click', Dec_Rate)
-button( bind=Dec_Rate, text='Decrease Rate!')
 
+rate1 = 500
+Dec_Rate = False
+Inc_Rate = False
+a = 8
+def Start():
+    #while rate() == 1:
+    Start = True
+    Dec_Rate = False
+    Inc_Rate = False
+    return Start
+#Start = Start and Start
+def Inc_Rate():
+    #while rate() == 500 or rate()==1:
+    Inc_Rate = True
+    Start = False
+    Dec_Rate = False
+    return Inc_Rate
+def Dec_Rate():
+    #while rate() == 1000 or rate()== 500:
+    Dec_Rate = True
+    Start = False
+    Inc_Rate = False
+    return Dec_Rate
+
+#scene.bind('click', Dec_Rate)
+button( bind=Start, text='Start!')
+button( bind=Inc_Rate, text='Increase Rate!')
+button( bind=Dec_Rate, text='Decrease Rate!')
 
 
 def forcee(planet1, planet2):
@@ -31,18 +52,38 @@ planet1 = sphere(pos= vector(2,0,0), radius = 0.2, mass=1, p = vector(0,30,0), m
 dt = 0.0001
 t = 0
 while True:
-    rate(rate1)
-    sun.force = forcee(sun, planet1)
-    planet1.force = forcee(planet1, sun)
-    print(planet1.force)
-    sun.p = sun.p + sun.force * dt
-    planet1.p = planet1.p + planet1.force*dt
-    sun.pos = sun.pos + sun.p / sun.mass*dt
-    planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
+    while Start is True:
+        rate(500)
+        sun.force = forcee(sun, planet1)
+        planet1.force = forcee(planet1, sun)
+        print(planet1.force)
+        sun.p = sun.p + sun.force * dt
+        planet1.p = planet1.p + planet1.force*dt
+        sun.pos = sun.pos + sun.p / sun.mass*dt
+        planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
+    while Inc_Rate == True:
+        rate(1000)
+        sun.force = forcee(sun, planet1)
+        planet1.force = forcee(planet1, sun)
+        print(planet1.force)
+        sun.p = sun.p + sun.force * dt
+        planet1.p = planet1.p + planet1.force*dt
+        sun.pos = sun.pos + sun.p / sun.mass*dt
+        planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
+    while Dec_Rate == True:
+        rate(10)
+        sun.force = forcee(sun, planet1)
+        planet1.force = forcee(planet1, sun)
+        print(planet1.force)
+        sun.p = sun.p + sun.force * dt
+        planet1.p = planet1.p + planet1.force*dt
+        sun.pos = sun.pos + sun.p / sun.mass*dt
+        planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
+
 
 
 #scene.range = 20
 #if True:
- #   k = keysdown() # a list of keys that are down
-  #  if 'down' in k: rate1 = 10000
-   # if 'up' in k: rate1 = 10
+    k = keysdown() # a list of keys that are down
+    if 'down' in k: rate = 10000
+    if 'up' in k: rate = 10
