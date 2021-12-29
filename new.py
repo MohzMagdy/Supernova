@@ -1,28 +1,30 @@
 from vpython import *
 
-rate1 = 500
+Start = True
 Dec_Rate = False
 Inc_Rate = False
-a = 8
-def Start():
+def Start(b):
     #while rate() == 1:
-    Start = True
+    global Start, Inc_Rate, Dec_Rate
+    Start = not Start
     Dec_Rate = False
     Inc_Rate = False
-    return Start
+    return Start, Inc_Rate, Dec_Rate
 #Start = Start and Start
-def Inc_Rate():
+def Inc_Rate(I):
     #while rate() == 500 or rate()==1:
-    Inc_Rate = True
+    global Start, Inc_Rate, Dec_Rate
+    Inc_Rate = not Inc_Rate
     Start = False
     Dec_Rate = False
-    return Inc_Rate
+    return Start, Inc_Rate, Dec_Rate
 def Dec_Rate():
     #while rate() == 1000 or rate()== 500:
-    Dec_Rate = True
+    global Start, Inc_Rate, Dec_Rate
+    Dec_Rate = not Dec_Rate
     Start = False
     Inc_Rate = False
-    return Dec_Rate
+    return Start, Inc_Rate, Dec_Rate
 
 #scene.bind('click', Dec_Rate)
 button( bind=Start, text='Start!')
@@ -48,12 +50,12 @@ planet1 = sphere(pos= vector(2,0,0), radius = 0.2, mass=1, p = vector(0,30,0), m
                  ,texture = "https://upload.wikimedia.org/wikipedia/commons/6/60/Earth_from_Space.jpg")
 #planet1.mass = 100
 #planet1.p = vector(0, 0, 5)
-
 dt = 0.0001
 t = 0
 while True:
-    while Start is True:
-        rate(500)
+    #rate(50)
+    if Start is True:
+        rate(300)
         sun.force = forcee(sun, planet1)
         planet1.force = forcee(planet1, sun)
         print(planet1.force)
@@ -61,7 +63,7 @@ while True:
         planet1.p = planet1.p + planet1.force*dt
         sun.pos = sun.pos + sun.p / sun.mass*dt
         planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
-    while Inc_Rate == True:
+    if Inc_Rate == True:
         rate(1000)
         sun.force = forcee(sun, planet1)
         planet1.force = forcee(planet1, sun)
@@ -70,7 +72,7 @@ while True:
         planet1.p = planet1.p + planet1.force*dt
         sun.pos = sun.pos + sun.p / sun.mass*dt
         planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
-    while Dec_Rate == True:
+    if Dec_Rate == True:
         rate(10)
         sun.force = forcee(sun, planet1)
         planet1.force = forcee(planet1, sun)
