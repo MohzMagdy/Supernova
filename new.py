@@ -32,7 +32,7 @@ button( bind=Inc_Rate, text='Increase Rate!')
 button( bind=Dec_Rate, text='Decrease Rate!')
 
 
-def forcee(planet1, planet2):
+def calc_force(planet1, planet2):
     G = 1
     Distance_vector = planet1.pos - planet2.pos
     rhat = Distance_vector / mag(Distance_vector)
@@ -56,8 +56,8 @@ while True:
     #rate(50)
     if Start is True:
         rate(300)
-        sun.force = forcee(sun, planet1)
-        planet1.force = forcee(planet1, sun)
+        sun.force = calc_force(sun, planet1)
+        planet1.force = calc_force(planet1, sun)
         print(planet1.force)
         sun.p = sun.p + sun.force * dt
         planet1.p = planet1.p + planet1.force*dt
@@ -65,8 +65,8 @@ while True:
         planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
     if Inc_Rate == True:
         rate(1000)
-        sun.force = forcee(sun, planet1)
-        planet1.force = forcee(planet1, sun)
+        sun.force = calc_force(sun, planet1)
+        planet1.force = calc_force(planet1, sun)
         print(planet1.force)
         sun.p = sun.p + sun.force * dt
         planet1.p = planet1.p + planet1.force*dt
@@ -74,8 +74,8 @@ while True:
         planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
     if Dec_Rate == True:
         rate(10)
-        sun.force = forcee(sun, planet1)
-        planet1.force = forcee(planet1, sun)
+        sun.force = calc_force(sun, planet1)
+        planet1.force = calc_force(planet1, sun)
         print(planet1.force)
         sun.p = sun.p + sun.force * dt
         planet1.p = planet1.p + planet1.force*dt

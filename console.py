@@ -11,4 +11,9 @@ def from_console():
 def to_console(planets):
     for planet in planets:
         print('ID: %s, Mass: %.2f, Velocity: (%s), Temperature %.2f, Position: (%s)' 
-        %(planet['id'], planet['mass'], ','.join([str('%.2f' %v) for v in planet['vel']]), planet['temp'], ','.join([str('%.2f' %v) for v in planet['pos']])))
+        %(planet['id'], 
+        planet['mass'], 
+        ','.join([str('%.2f' %v) for v in planet['vel']]), 
+        planet['temp'], 
+        ','.join([str('%.2f' %v) for v in planet['pos']]))
+        )

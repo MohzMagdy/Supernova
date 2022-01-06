@@ -45,4 +45,3 @@ def to_file(path, planets):
         writer.writerow(values)
     
     fh.close()
-    return
