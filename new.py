@@ -1,5 +1,6 @@
 from vpython import *
 
+
 Start = True
 Dec_Rate = False
 Inc_Rate = False
@@ -50,7 +51,7 @@ planet1 = sphere(pos= vector(2,0,0), radius = 0.2, mass=1, p = vector(0,30,0), m
                  ,texture = "https://upload.wikimedia.org/wikipedia/commons/6/60/Earth_from_Space.jpg")
 #planet1.mass = 100
 #planet1.p = vector(0, 0, 5)
-dt = 0.0001
+dt  = 0.0001
 t = 0
 while True:
     #rate(50)

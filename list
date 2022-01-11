@@ -1,0 +1,93 @@
+from vpython import*
+import copy
+import math
+
+Start = True
+
+def Start(b):
+    #while rate() == 1:
+    global Start, Inc_Rate, Dec_Rate
+    Start = not Start
+    Dec_Rate = False
+    Inc_Rate = False
+    return Start, Inc_Rate, Dec_Rate
+
+button( bind=Start, text='Start!')
+
+def forcee(planet1, planet2):
+    G = 1
+    Distance_vector = planet1.pos - planet2.pos
+    rhat = Distance_vector / mag(Distance_vector)
+    force = -G * planet1.mass * planet2.mass / (mag(Distance_vector))**2
+    force_vector = force * rhat
+    return force_vector
+
+
+
+
+def calc_axis(list):
+    x=max(list)
+    y=min(list)
+    aa=(float(x)+float(y))/2
+    cc=(float(x)-float(y))/2
+    bb=math.sqrt(aa**2-cc**2)
+    return '%0.3f'%aa , '%0.3f'%bb ,'%0.3f'%cc
+
+
+def calc_ecc(a,c):
+    e=c/a
+    return e
+
+
+def calc_period (a,mass):
+    T=math.sqrt( (4*(math.pi**2)*(float(a)**2)) / (float(mass)*(6.67*10**-11)) )
+    return T
+
+
+sun = sphere(pos=vector(0,0,0), radius = 0.8
+             ,texture="https://media.istockphoto.com/photos/realistic-sun-or-star-closeup-3d-rendering-illustration-picture-id1267178422?b=1&k=20&m=1267178422&s=170667a&w=0&h=EtPtCIh3MP5f2f9XjNxTHChncLA5WUeuY5TWVuP1SEs=",
+             mass = 1500 , p = vector(0,0,0), make_Trail = True)
+#sun.p = vector(0,0,5) # Sphere angular momentum
+planet1 = sphere(pos= vector(2,0,0), radius = 0.2, mass=1, p = vector(0,30,0), make_Trail = True
+                 ,texture = "https://upload.wikimedia.org/wikipedia/commons/6/60/Earth_from_Space.jpg")
+#planet1.mass = 100
+#planet1.p = vector(0, 0, 5)
+dt  = 0.0001
+t = 0
+p=[]
+c=1
+while True:
+    #rate(50)
+    if Start is True:
+        rate(300)
+        sun.force = forcee(sun, planet1)
+        planet1.force = forcee(planet1, sun)
+        # print(planet1.force)
+        sun.p = sun.p + sun.force * dt
+        planet1.p = planet1.p + planet1.force*dt
+        sun.pos = sun.pos + sun.p / sun.mass*dt
+        planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
+        print(sun.p)
+        q=sun.pos
+        w=planet1.pos
+        dis=math.sqrt( (q.x-w.x)**2 +(q.y-w.y)**2 +(q.z-w.z)**2 )
+        print('%0.5f'%dis)
+        x=copy.deepcopy('%0.5f'%dis)
+        # print(x)
+        if len(p)==0:
+            p.append(x)
+        elif p[0]!=x:
+            p.append(x)
+        c=0
+    if Start is False and c==0:
+        print(p)
+        c=1
+        ax=calc_axis(p)
+        ax_l=list(ax)
+        print('(a,b,c)=',ax_l)
+        ecc=calc_ecc(float(ax_l[0]),float(ax_l[2]))
+        print('e=','%0.3f'%ecc)
+        time=calc_period(ax_l[0],sun.mass)
+        print('Periodic time','%0.3e'%time)
+
+
