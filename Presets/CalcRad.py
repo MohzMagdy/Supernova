@@ -9,7 +9,7 @@ curve= gcurve(color=color.black)
 # h=6.626*10**-34
 # c=3*10**8
 # k=1.38*(10**-23)
-for y in arange(2*(10**-7),14*(10**-7),2*(10*-7)):
+for y in arange(2,14,2):
     B=y**2
     # B=(2*float(h)*(float(c)**2) / (float(y)**5)) / ( exp**( (float(h)*float(c))/(float(y)*float(k)*float(T)) ) -1 )
     curve.plot(y,B)
