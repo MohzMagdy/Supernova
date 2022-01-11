@@ -2,7 +2,7 @@ import csv
 
 #Planet attributes: id, mass, initial velocity vector "x,y,z" , temperature, initial position vector "x,y,z"
 def from_file(path):
-    fh = open(path, 'r') #'.\\Presets\\'+
+    fh = open('Presets\\' + path, 'r') 
     reader = csv.reader(fh)
 
     planets = []
@@ -28,7 +28,7 @@ def from_file(path):
     return planets
 
 def to_file(path, planets):
-    fh = open(path, 'w')
+    fh = open('Presets\\' + path, 'w')
     writer = csv.writer(fh)
 
     headers = ['ID', 'Mass', 'Velocity', 'Temperature', 'Position']
