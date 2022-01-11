@@ -1,0 +1,41 @@
+from vpython import*
+
+Start = True
+
+# def calc_opp(time1,time2):
+#     s=(1/time1)-(1/time2)
+#     t=1/s
+#     return t
+
+
+def forcee(planet1, planet2):
+    G = 1
+    Distance_vector = planet1.pos - planet2.pos
+    rhat = Distance_vector / mag(Distance_vector)
+    force = -G * planet1.mass * planet2.mass / (mag(Distance_vector))**2
+    force_vector = force * rhat
+    return force_vector
+
+
+
+button( bind=Start, text='Start!')
+
+planet0=sphere(pos=vector(0,0,0),radius=0.8,mass=1500,p=vector(0,0,0),make_Trail=True)
+planet1=sphere(pos=vector(2,0,0),radius=0.2,mass=1,p=vector(2,0,0), make_Trail=True)
+# planet2=sphere(pos=vector(8,0,0),radius=0.2,mass=1,p=vector(8,0,0))
+
+dt  = 0.0001
+t = 0
+while True:
+    if Start is True:
+        rate(300)
+        planet0.force = forcee(planet0, planet1)
+        planet1.force = forcee(planet1, planet0)
+        # planet2.force = forcee(planet2, planet0)
+        print(planet1.force)
+        planet0.p = planet0.p + planet0.force * dt
+        planet1.p = planet1.p + planet1.force*dt
+        # planet2.p = planet2.p + planet2.force*dt
+        planet0.pos = planet0.pos + planet0.p / planet0.mass*dt
+        planet1.pos = planet1.pos + planet1.p / planet1.mass*dt
+        # planet2.pos = planet2.pos + planet2.p / planet2.mass*dt
