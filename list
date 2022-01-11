@@ -1,7 +1,7 @@
 from vpython import*
 import copy  #to input data in the list
 import math
-
+# from axis import *
 Start = True
 
 def Start(b):
