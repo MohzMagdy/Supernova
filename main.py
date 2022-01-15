@@ -12,7 +12,7 @@ while True:
         diff_data.append({
             'pos': vector(0,0,0),
             'p': vector(0,0,0)
-            })
+        })
 
     for i in range(len(planets_list)-1):
         for j in range(i+1, len(planets_list)):

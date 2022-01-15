@@ -8,6 +8,10 @@ def get_dt():
     global dt
     return dt
 
+def get_running():
+    global running
+    return running
+
 def pause():
     global running, pause_button, dt, prev_dt
     if running:
