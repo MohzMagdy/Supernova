@@ -35,7 +35,7 @@ button(bind =CalcRad , text = 'plank')
 #     print('maximum lamda',y_max)
 
 
-def colorrr(object):
+def calc_color(object):
     r=[]
     g=[]
     b=[]
@@ -43,37 +43,40 @@ def colorrr(object):
     c=3*10**8
     k=1.38*(10**-23)
 
-    for y in range (650,700):
-        D=(2*h* (c**2) )/(y*(10**-9))**5
-        F=(h*c)/(y*(10**-9)*k*(object.temp))
-        G=(2.718**(F))
-        B=D/(G-1)
-        x=4*3.14*((object.radius)**2)*B
-        r.append(x)
+    try:
+        for y in range (650,700):
+            D=(2*h* (c**2) )/(y*(10**-9))**5
+            F=(h*c)/(y*(10**-9)*k*(object.temp))
+            G=(2.718**(F))
+            B=D/(G-1)
+            x=4*3.14*((object.radius)**2)*B
+            r.append(x)
 
-    for y in range (550,580):
-        D=(2*h* (c**2) )/(y*(10**-9))**5
-        F=(h*c)/(y*(10**-9)*k*(object.temp))
-        G=(2.718**(F))
-        B=D/(G-1)
-        x=4*3.14*((object.radius)**2)*B
-        g.append(x)
+        for y in range (550,580):
+            D=(2*h* (c**2) )/(y*(10**-9))**5
+            F=(h*c)/(y*(10**-9)*k*(object.temp))
+            G=(2.718**(F))
+            B=D/(G-1)
+            x=4*3.14*((object.radius)**2)*B
+            g.append(x)
 
-    for y in range (450,500):
-        D=(2*h* (c**2) )/(y*(10**-9))**5
-        F=(h*c)/(y*(10**-9)*k*(object.temp))
-        G=(2.718**(F))
-        B=D/(G-1)
-        x=4*3.14*((object.radius)**2)*B
-        b.append(x)
+        for y in range (450,500):
+            D=(2*h* (c**2) )/(y*(10**-9))**5
+            F=(h*c)/(y*(10**-9)*k*(object.temp))
+            G=(2.718**(F))
+            B=D/(G-1)
+            x=4*3.14*((object.radius)**2)*B
+            b.append(x)
+    except:
+        return vector(255,255,255)
 
     rr =np.trapz(r)
     gg =np.trapz(g)
     bb =np.trapz(b)
 
     # print(rr%255,gg%255,bb%255)
-    collor =vector(rr%255,gg%255,bb%255)
-    return collor
+    color =vector(rr%255,gg%255,bb%255)
+    return color
 
 
 

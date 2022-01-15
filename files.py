@@ -1,6 +1,8 @@
 import csv
 
 #Planet attributes: id, mass, initial velocity vector "x,y,z" , temperature, initial position vector "x,y,z"
+
+# Takes a file name and imports planets from its rows
 def from_file(path):
     try:
         fh = open('Presets\\' + path, 'r') 
@@ -35,6 +37,8 @@ def from_file(path):
     fh.close()
     return planets_data
 
+
+# Takes a list of dictionaries of planets data and exports them into a file of the given name
 def to_file(path, planets_data):
     fh = open('Presets\\' + path, 'w')
     writer = csv.writer(fh)

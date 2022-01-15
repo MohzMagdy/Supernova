@@ -1,13 +1,33 @@
 from vpython import*
 import math
+from rate import *
 
-def calc_axis(list):
-    x=max(list)
-    y=min(list)
-    a=(x+y)/2
-    c=(x-y)/2
-    b=math.sqrt(a**2+c**2)
-    return a , b ,c
+from phys import move_planet
+
+def calc_axes(planet1, planet2): # Planet 1 around Planet 2
+    dt = 0.005
+    bound = False
+    coord_list = []
+
+    for i in range(0, 10000):
+        coord_list.append(mag(planet1.pos))
+        motion = move_planet(planet1, planet2)
+        planet1.pos = motion[0][0]
+        planet1.p = motion[0][1]
+        if planet1.pos == coord_list[0]:
+            bound = True
+            break
+    
+    if bound:
+        x=max(coord_list)
+        y=min(coord_list)
+        a=(x + y)/2
+        c=(x - y)/2
+        b=math.sqrt(a**2 + c**2)
+        return (a,b,c)
+    else:
+        print('System is unbound')
+        return (0,0,0)
 
 def calc_ecc(a,c):
     e=c/a
@@ -16,3 +36,33 @@ def calc_ecc(a,c):
 def calc_period (a,planet):
     T=math.sqrt( (4*(math.pi**2)*(a**2)) / (planet.mass*(6.67*10**-11)) )
     return T
+
+# def calc_axes(planet1, planet2): # Planet 1 around Planet 2
+#     bound = False
+#     coord_list = []
+
+#     if not get_running():
+#         pause()
+
+#     for i in range(0, 10000):
+#         coord_list.append(mag(planet1.pos))
+#         motion = move_planet(planet1, planet2)
+#         planet1.pos = motion[0][0]
+#         planet1.p = motion[0][1]
+#         print(motion)
+#         if mag(planet1.pos) == coord_list[0]:
+#             bound = True
+#             break
+    
+#     if bound:
+#         x = max(coord_list)
+#         y = min(coord_list)
+#         a = (x + y)/2
+#         c = (x - y)/2
+#         b = math.sqrt(a**2 + c**2)
+#         print(x,y, a,b,c)
+#         return (a,b,c)
+#     else:
+#         print('System is unbound')
+#         return (0,0,0)
+# button(bind = lambda: calc_axes(planets_list[1], planets_list[0]), text = 'Calc Axes')

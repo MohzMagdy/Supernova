@@ -48,6 +48,8 @@ def clear_planets():
     for i in range(len(planets_list)):
         planets_list[i].visible = False
     planets_list.clear()
+
+    # Recreate the 'Add Sun & Earth' button if it doesn't exist
     if not default_planets_button_exist:
        default_planets_button = button(bind = default_planets, text = 'Add Sun & Earth')   
        default_planets_button_exist = True
@@ -62,7 +64,13 @@ def default_planets():
     planets_list.append(sun)
     planets_list.append(earth)
 
+    # Delete itself once used
     default_planets_button.delete()
     default_planets_button_exist = False
 default_planets_button = button(bind = default_planets, text = 'Add Sun & Earth')
 default_planets_button_exist = True
+
+#Physics buttons
+button(bind = lambda: calc_rad(input('Enter planet ID: ')), text = 'Plank Distribution')
+button(bind = lambda: calc_luminosity(input('Enter planet ID: ')), text = 'Luminosity')
+button(bind = lambda: calc_COM(input('Enter planet 1 ID: '), input('Enter planet 2 ID: ')), text = 'Get Center of Mass')

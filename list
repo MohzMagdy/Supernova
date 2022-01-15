@@ -1,5 +1,5 @@
 from vpython import*
-import copy  #to input data in the list
+import copy  
 import math
 # from axis import *
 Start = True
@@ -31,7 +31,7 @@ def calc_axis(list):
     aa=(float(x)+float(y))/2
     cc=(float(x)-float(y))/2
     bb=math.sqrt(aa**2-cc**2)
-    return '%0.3f'%aa , '%0.3f'%bb ,'%0.3f'%cc , 'major axis', x , 'minor axis', y
+    return ('%0.3f'%aa , '%0.3f'%bb ,'%0.3f'%cc , 'major axis', x , 'minor axis', y)
 
 
 def calc_ecc(a,c):

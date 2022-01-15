@@ -1,3 +1,4 @@
+# Imports a planet from console
 def from_console():
     try:
         planet = {
@@ -13,6 +14,7 @@ def from_console():
         print('Invalid data!')
     return []
 
+# Exports data of all current planets to console
 def to_console(planets_data):
     for planet in planets_data:
         print('ID: %s, Mass: %.2f, Velocity: (%s), Temperature %.2f, Position: (%s)' 
