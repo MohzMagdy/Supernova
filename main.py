@@ -4,6 +4,8 @@ from files import *
 from console import *   
 from phys import *
 from buttons import *
+# from Luminosity import *
+from CalcRad import *
 
 while True:
     rate(30)
@@ -25,8 +27,17 @@ while True:
     for i in range(len(planets_list)):
         planets_list[i].pos += diff_data[i]['pos']
         planets_list[i].p += diff_data[i]['p']
+    
+    for i in range(len(planets_list)):
+        if planets_list[i].texture==None:
+            planets_list[i].color=hat(colorrr(planets_list[i]))
 
-#scene.range = 20
+            
+
+
+
+
+# #scene.range = 20
 #if True:
     # k = keysdown() # a list of keys that are down
     # if 'down' in k: rate = 10000

@@ -8,7 +8,8 @@ import numpy as np
 # from scipy.integrate import quad
 
 
-def CalcRad(object):
+def CalcRad(planet):
+    # temp=float(input('T'))
     gd = graph(width=600, height=250,
         title='<b>Blackbody Radiation</b>',
         xtitle='<i>Lamda</i>', ytitle='<i>Radiation</i>',
@@ -19,15 +20,19 @@ def CalcRad(object):
     k=1.38*(10**-23)
     for y in arange(200,3000,2)*10**-9:
         D=(2*h* (c**2) )/(y)**5
-        F=(h*c)/(y*k*object.temp)
+        F=(h*c)/(y*k*planet.temp)
         G=(2.718**(F))
         B=D/(G-1)
         
         curve.plot(y,B)
+        y_max=object.temp*0.002897755
+        print('maximum lamda',y_max)
+button(bind =CalcRad , text = 'plank')
 
-def max_lamda(object):
-    y_max=object.temp*0.002897755
-    print('maximum lamda',y_max)
+
+# def max_lamda(object):
+#     y_max=object.temp*0.002897755
+#     print('maximum lamda',y_max)
 
 
 def colorrr(object):
@@ -72,11 +77,11 @@ def colorrr(object):
 
 
 
-s=sphere(pos=vector(0,0,0),radius=89,temp=889630)
-s.color=hat(colorrr(s))
+# s=sphere(pos=vector(0,0,0),radius=89,temp=8830)
+# s.color=hat(colorrr(s))
 
 
 
 
 # T=7000
-# CalcRad(T)
+# CalcRad(s)
